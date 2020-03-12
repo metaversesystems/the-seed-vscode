@@ -17,8 +17,12 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.helloWorld",
-				"title": "Hello World"
+				"command": "configOptions.editEntry",
+				"title": "Edit",
+				"icon": {
+				  "light": "resources/light/edit.svg",
+				  "dark": "resources/dark/edit.svg"
+				}
 			}
 		],
 		"viewsContainers": {
@@ -26,26 +30,35 @@
 				{
 					"id": "the-seed",
 					"title": "The Seed",
-					"icon": "circle-outline.svg"
+					"icon": "resources/circle-outline.svg"
 				}
 			]
 		},
 		"views": {
 			"the-seed": [
 				{
-                  "id": "configOptions",
-                  "name": "Configuration"
+					"id": "configOptions",
+					"name": "Configuration"
 				},
-                {
-                  "id": "dependencies",
-                  "name": "Dependencies"
-                },
-                {
-                  "id": "projects",
-                  "name": "Projects"
-                }
+				{
+					"id": "dependencies",
+					"name": "Dependencies"
+				},
+				{
+					"id": "projects",
+					"name": "Projects"
+				}
 			]
-		}
+		},
+                "menus": {
+                  "view/item/context": [
+                    {
+                      "command": "configOptions.editEntry",
+                      "when": "view == configOptions && viewItem == TreeBranch",
+                      "group": "inline"
+                    }
+                  ]
+                }
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

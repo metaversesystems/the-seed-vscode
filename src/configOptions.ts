@@ -17,7 +17,7 @@ export class ConfigOptionProvider implements vscode.TreeDataProvider<TreeItem> {
 	  Object.keys(config_file.config).forEach(section => {
 		let opts: TreeItem[] = [];
 		Object.keys(config_file.config[section]).forEach(option => {
-		  opts.push(new TreeItem(option + ': ' + config_file.config[section][option], [new TreeItem(config_file.config[section][option])]));
+		  opts.push(new TreeItem(option + ': ' + config_file.config[section][option]));
 		});
 		let s = new TreeItem(section, opts, vscode.TreeItemCollapsibleState.Expanded);
 		this.data.push(s);
@@ -44,12 +44,14 @@ class TreeItem extends vscode.TreeItem {
   children: TreeItem[]|undefined;
   
   constructor(label: string, children?: TreeItem[], state?: vscode.TreeItemCollapsibleState) {
-	  if(state === undefined) {
-		  state = children === undefined ? vscode.TreeItemCollapsibleState.None :
-		  vscode.TreeItemCollapsibleState.Collapsed;
-	  }
     super(label, state);
-	  						   
+    if(state === undefined) {
+      state = children === undefined ? vscode.TreeItemCollapsibleState.None :
+      vscode.TreeItemCollapsibleState.Collapsed;
+    }
+
+	if(children !== undefined) this.contextValue = 'TreeItem';
+	else this.contextValue = 'TreeBranch';
     this.children = children;
   }
 }
