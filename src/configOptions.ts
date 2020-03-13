@@ -11,20 +11,48 @@ export class ConfigOptionProvider implements vscode.TreeDataProvider<TreeItem> {
 	data: TreeItem[];
 
     constructor() {
-      let config_file = new Config();
-	  this.data = [];
-	 
-	  Object.keys(config_file.config).forEach(section => {
-		let opts: TreeItem[] = [];
-		Object.keys(config_file.config[section]).forEach(option => {
-		  opts.push(new TreeItem(option + ': ' + config_file.config[section][option]));
-		});
-		let s = new TreeItem(section, opts, vscode.TreeItemCollapsibleState.Expanded);
-		this.data.push(s);
-	  });
-    }
+		this.data = [];
+		this.loadConfig();
+ 	}
+
+	loadConfig(): void {
+		this.data = [];
+		let config_file = new Config();
+
+		Object.keys(config_file.config).forEach(section => {
+			let opts: TreeItem[] = [];
+			Object.keys(config_file.config[section]).forEach(option => {
+			  let item = new TreeItem(option + ': ' + config_file.config[section][option]);
+			  item.id = section + "." + option;
+			  opts.push(item);
+			});
+			let s = new TreeItem(section, opts, vscode.TreeItemCollapsibleState.Expanded);
+			this.data.push(s);
+		  });
+	}
+
+	edit(value: string | undefined): void {
+		if(value === undefined) {
+			return;
+		}
+		let [section, option] = value.split(".");
+		let config_file = new Config();
+		let qs = config_file.Questions();
+		let self = this;
+		qs.forEach(async function(q: any) {
+			if(q.name !== value) {
+				return;
+			}
+			console.log(q);
+		  let result = await vscode.window.showInputBox({ prompt: q.message, value: q.default });
+		  config_file.config[section][option] = result;
+		  config_file.save();
+		  self.refresh();
+        });
+	}
 
 	refresh(): void {
+		this.loadConfig();
 		this._onDidChangeTreeData.fire();
 	}
 
@@ -50,8 +78,11 @@ class TreeItem extends vscode.TreeItem {
       vscode.TreeItemCollapsibleState.Collapsed;
     }
 
-	if(children !== undefined) this.contextValue = 'TreeItem';
-	else this.contextValue = 'TreeBranch';
+	if(children !== undefined) {
+	  this.contextValue = 'TreeItem';
+	} else {
+	  this.contextValue = 'TreeBranch';
+	}
     this.children = children;
   }
 }

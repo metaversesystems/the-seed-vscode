@@ -20,8 +20,8 @@
 				"command": "configOptions.editEntry",
 				"title": "Edit",
 				"icon": {
-				  "light": "resources/light/edit.svg",
-				  "dark": "resources/dark/edit.svg"
+					"light": "resources/light/edit.svg",
+					"dark": "resources/dark/edit.svg"
 				}
 			}
 		],
@@ -50,15 +50,15 @@
 				}
 			]
 		},
-                "menus": {
-                  "view/item/context": [
-                    {
-                      "command": "configOptions.editEntry",
-                      "when": "view == configOptions && viewItem == TreeBranch",
-                      "group": "inline"
-                    }
-                  ]
-                }
+		"menus": {
+			"view/item/context": [
+				{
+					"command": "configOptions.editEntry",
+					"when": "view == configOptions && viewItem == TreeBranch",
+					"group": "inline"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
@@ -92,6 +92,6 @@
 	},
 	"homepage": "https://github.com/metaversesystems/the-seed-vscode#readme",
 	"dependencies": {
-		"@metaverse-systems/the-seed-utils": "0.0.3"
+		"@metaverse-systems/the-seed-utils": "0.0.4"
 	}
 }
