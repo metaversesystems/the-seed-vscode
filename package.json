@@ -2,7 +2,7 @@
 	"name": "@metaverse-systems/the-seed-vscode",
 	"displayName": "the-seed-vscode",
 	"description": "GUI for The Seed",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"enableProposedApi": true,
 	"engines": {
 		"vscode": "^1.43.0"
@@ -80,7 +80,8 @@
 		"glob": "^7.1.6",
 		"mocha": "^7.0.1",
 		"typescript": "^3.7.5",
-		"vscode-test": "^1.3.0"
+		"vscode-test": "^1.3.0",
+        "minimist": ">=1.2.2"
 	},
 	"repository": {
 		"type": "git",
