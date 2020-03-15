@@ -11,7 +11,8 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onView:configOptions"
+		"onView:configOptions",
+		"onView:dependencies"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -92,6 +93,6 @@
 	},
 	"homepage": "https://github.com/metaversesystems/the-seed-vscode#readme",
 	"dependencies": {
-		"@metaverse-systems/the-seed-utils": "0.0.4"
+		"@metaverse-systems/the-seed-utils": "0.0.7"
 	}
 }
