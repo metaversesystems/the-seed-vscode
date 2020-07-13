@@ -53,7 +53,7 @@ export class ConfigOptionProvider implements vscode.TreeDataProvider<TreeItem> {
 
 	refresh(): void {
 		this.loadConfig();
-		this._onDidChangeTreeData.fire();
+		this._onDidChangeTreeData.fire(undefined);
 	}
 
 	getTreeItem(element: TreeItem): vscode.TreeItem|Thenable<vscode.TreeItem> {

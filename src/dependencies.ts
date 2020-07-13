@@ -67,7 +67,7 @@ export class DependencyProvider implements vscode.TreeDataProvider<TreeItem> {
 
 	refresh(): void {
 		this.loadDependencies();
-		this._onDidChangeTreeData.fire();
+		this._onDidChangeTreeData.fire(undefined);
 	}
 
 	getTreeItem(element: TreeItem): vscode.TreeItem|Thenable<vscode.TreeItem> {
